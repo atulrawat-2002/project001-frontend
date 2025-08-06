@@ -1,0 +1,46 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+.login-box {
+    padding: 35px;
+    min-width: 400px;
+    border: 1px solid black;
+}
+
+.heading {
+    text-align: center;
+}
+
+label, input {
+    display: block;
+    width: 100%;
+    margin-block: 8px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    padding: 8px 16px;
+}
+
+.submit {
+    margin-top: 25px;
+    background-color: rgb(42, 134, 255);
+    color: white;
+    border: none;
+}
+
+.submit:hover{
+    background-color: rgb(29, 113, 223);
+}
+
+
+// write css for animation
+
+
+}
