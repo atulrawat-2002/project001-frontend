@@ -19,6 +19,8 @@ const login = () => {
                 password
             })
             const accessToken = response?.data?.result?.accessToken;
+            console.log(accessToken);
+            
             setItem(KEY_ACCESS_TOKEN, accessToken);
         } catch (error) {
             console.log(error);
