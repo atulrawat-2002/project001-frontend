@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss"
 import { useState } from "react";
 import { axiosClient } from "../../utils/axiosClient";
@@ -6,7 +6,7 @@ import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager";
 
 
 const login = () => {
-
+    const navigate = useNavigate();
     const [email, setEmail] = useState("abc@gmail.com");
     const [password, setPassword] = useState("1234")
 
@@ -19,9 +19,9 @@ const login = () => {
                 password
             })
             const accessToken = response?.data?.result?.accessToken;
-            console.log(accessToken);
             
             setItem(KEY_ACCESS_TOKEN, accessToken);
+            navigate("/")
         } catch (error) {
             console.log(error);
 

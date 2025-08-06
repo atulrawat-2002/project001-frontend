@@ -2,13 +2,11 @@ import axios from "axios"
 import { getItem, KEY_ACCESS_TOKEN, setItem, removeItem } from "./localStorageManager"
 
 export const axiosClient = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: import.meta.env.VITE_SERVER_BASE_URL,
     withCredentials: true
 })
 
-axiosClient.interceptors.request.use( (request) => {
-    console.log("Request interceptor ran");
-    
+axiosClient.interceptors.request.use( (request) => {    
     const accessToken = getItem(KEY_ACCESS_TOKEN);
 
     request.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -16,20 +14,17 @@ axiosClient.interceptors.request.use( (request) => {
     return request;
 } )
 
-axiosClient.interceptors.response.use( async (response) => {
-    console.log("Response interceptor ran");
-    
+axiosClient.interceptors.response.use( async (response) => {    
     const data = response?.data;
     const error = response?.message;
     const originalRequest = response?.config;
-    // console.log("this is response", response, " and response.data ",  data, "response.error", error, "response.originlrequest",originalRequest);
-    console.log(data.status);
+    const method = response?.config?.method;
+    
     
     // If the request was successfull then simply return the resonse
     try {
         if(data.status === "OK"){
             console.log("Ok part ran");
-            console.log(response);
         return response;
     }
 
@@ -37,30 +32,25 @@ axiosClient.interceptors.response.use( async (response) => {
     if(data.statusCode === 401 && originalRequest.url === "/auth/refresh") {
         removeItem(KEY_ACCESS_TOKEN);
         window.location.replace('/login', '_self');
-        console.log("refresh expire");
-        
+         
         return Promise.reject(error);
     }
 
     if(data.statusCode === 401) {
-        const accessToken = await axiosClient("/auth/refresh", { withCredentials: true });
+        const newResponse = await axiosClient.get("/auth/refresh");
 
-        setItem(KEY_ACCESS_TOKEN, accessToken);
+        setItem(KEY_ACCESS_TOKEN, newResponse?.data?.result?.accessToken);
 
-        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-
-        let newResponse = await axiosClient(originalRequest.url, { withCredentials: true });
-        console.log("simple 401");
+        console.log(newResponse?.data?.result?.accessToken);
         
 
-        return newResponse;
+        originalRequest.headers["Authorization"] = `Bearer ${newResponse?.result?.accessToken}`;
+
+        return axios(originalRequest);
     }
     } catch (e) {
-        console.log(e)
+        console.log(e) 
     }
     
-
-    return response;
-
     
 } )

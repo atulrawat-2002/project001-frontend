@@ -11,7 +11,6 @@ const Home = () => {
 
     const getData = async () => {
         const result = await axiosClient.get("/posts/all");
-        console.log(result);
         
     }
 
