@@ -1,23 +1,13 @@
-import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import "./Home.scss";
-import { axiosClient } from "../../utils/axiosClient";
+import Navbar from "../../components/navbar/Navabr";
 
 
 const Home = () => {
 
-    useEffect(() => {
-        getData();
-    }, [])
-
-    const getData = async () => {
-        const result = await axiosClient.get("/posts/all");
-        
-    }
-
     return <>
-    <div>
-         Home
-    </div>
+    <Navbar />
+    <Outlet />
     </>
 }
 
