@@ -37,7 +37,9 @@ axiosClient.interceptors.response.use( async (response) => {
     }
 
     if(data.statusCode === 401) {
-        const newResponse = await axiosClient.get("/auth/refresh");
+        const newResponse = await axios.create({
+            withCredentials: true
+        }).get(`${import.meta.env.VITE_SERVER_BASE_URL}/auth/refrsh`)
 
         setItem(KEY_ACCESS_TOKEN, newResponse?.data?.result?.accessToken);
 
