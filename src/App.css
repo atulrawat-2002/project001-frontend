@@ -13,11 +13,17 @@
   --accent-color: #458eff;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #212121;
 }
 
-h3, h6 {
+h3,
+h6 {
   font-weight: 400;
 }
 
@@ -37,4 +43,41 @@ p {
 .container {
   max-width: 960px;
   margin-inline: auto;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: bold;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #589bff;
+}
+
+.btn-primary:active {
+  background-color: var(--accent-color);
+}
+
+.btn-secondary {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  padding: 10px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: none;
+}
+
+.btn-secondary:hover {
+  background-color: #ddd;
+  color: #3982ee;
+}
+
+.btn-secondary:active {
+  background-color: none;
 }

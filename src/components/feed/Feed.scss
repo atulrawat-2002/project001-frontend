@@ -1,5 +1,5 @@
 .feed {
-    height: 100vh;
+    margin-top: 60px;
     .container {
         display: flex;
         gap: 20px;
@@ -8,7 +8,7 @@
 
     .left-part {
         flex: 2;
-        overflow: auto;
+        overflow-y: auto;
     }
     .right-part {
         flex: 1;

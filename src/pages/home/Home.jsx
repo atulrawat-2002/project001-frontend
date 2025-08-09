@@ -4,10 +4,13 @@ import Navbar from "../../components/navbar/Navabr";
 
 
 const Home = () => {
-
+    
     return <>
     <Navbar />
-    <Outlet />
+    <div className="outlet" style={{marginTop: "60px"}} >
+         <Outlet />
+    </div>
+   
     </>
 }
 
