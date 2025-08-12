@@ -1,37 +1,37 @@
+import { useEffect } from "react";
 import Follower from "../follower/Follower";
 import Post from "../post/Posts";
 import "./Feed.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { getFeeData } from "../../redux/slices/feedSlice";
 
 const Feed = () => {
+    const dispatch = useDispatch();
+    const feedData = useSelector(state => state?.feedReducer?.feedData);
+
+    useEffect(() => {
+        dispatch(getFeeData())
+    }, [])
+
     return <>
         <div className="feed">
             <div className="container">
                 <div className="left-part">
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
+                  { feedData?.posts?.map(item => <Post key={item._id} post={item} />) }  
                 </div>
                 <div className="right-part">
                     <div className="followings">
                         <h3 className="title">You are following</h3>
 
-                        <Follower />
-                        <Follower />
-                        <Follower />
-                        <Follower />
-                        <Follower />
+                        {
+                            feedData?.curUser?.followings.map(item => <Follower key={item._id} data={item} />)
+                        }
                     </div>
                     <div className="suggestions">
                         <h3 className="title">Suggested for you</h3>
-
-                        <Follower />
-                        <Follower />
-                        <Follower />
-                        <Follower />
-                        <Follower />
+                        {
+                            feedData?.suggestions?.map(item => <Follower key={item._id} data={item} />)
+                        }
                     </div>
                 </div>
             </div>

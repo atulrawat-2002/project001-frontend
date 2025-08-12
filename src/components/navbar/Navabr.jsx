@@ -2,38 +2,42 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "../avatar/Avatar";
 import "./Navbar.scss"
 import { RiLogoutBoxLine } from "react-icons/ri";
-import LoadingBar from "react-top-loading-bar";
-import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../redux/slices/appConfigSlice";
+import { axiosClient } from "../../utils/axiosClient";
+import { KEY_ACCESS_TOKEN, removeItem } from "../../utils/localStorageManager";
 
 
 
 const Navbar = () => {
 
-const loadingRef = useRef()
-const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const navigat = useNavigate()
+const navigate = useNavigate();
+const myProfile = useSelector(state => state.appConfigReducer?.myProfile);
 
-function toggleLoading () {
-    if(loading) {
-        setLoading(false);
-        loadingRef.current.complete();
-    } else {
-        setLoading(true);
-        loadingRef.current.continuousStart(); 
+const handleLogOut = async () => {
+    try {
+        dispatch(setLoading(true));
+    await axiosClient.post("/auth/logout");
+    removeItem(KEY_ACCESS_TOKEN)
+    navigat("/login");
+    dispatch(setLoading(false))
+    } catch (error) {
+        console.log(error);   
     }
 }
 
-const navigate = useNavigate();
-
     return <>
         <div className="navbar" >
-            <LoadingBar height={6} color="#458eff" ref={loadingRef} shadow={true} />
+            
             <div className="container">
                 <h2 onClick={() => navigate('/')} className="banner hover-link ">Social Media</h2>
                 <div className="right-side">
-                    <div className=" hover-link " onClick={() => navigate('/profile')} >
-                        <Avatar />
+                    <div className=" hover-link " onClick={() => navigate(`/profile/${myProfile?._id}`)} >
+                        <Avatar src={myProfile?.avatar?.url} />
                     </div>
-                    <div className="logout hover-link" onClick={toggleLoading} >
+                    <div className="logout hover-link" onClick={handleLogOut} >
                         <RiLogoutBoxLine />
                     </div>
                 </div>

@@ -7,8 +7,8 @@ import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager";
 
 const login = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("abc@gmail.com");
-    const [password, setPassword] = useState("1234")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -18,9 +18,12 @@ const login = () => {
                 email,
                 password
             })
+
+            if(response?.data?.result?.accessToken){
             const accessToken = response?.data?.result?.accessToken;
             
             setItem(KEY_ACCESS_TOKEN, accessToken);
+            }
             navigate("/")
         } catch (error) {
             console.log(error);
