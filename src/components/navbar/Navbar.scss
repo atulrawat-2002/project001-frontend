@@ -11,12 +11,28 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        .banner {
+            color: #458eff;
+        }
     }
 
     .right-side {
         display: flex;
-        gap: 20px;
+        gap: 26px;
         align-items: center;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+
+            .user-name {
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+        }
     }
 
     .logout {

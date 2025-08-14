@@ -34,8 +34,9 @@ const handleLogOut = async () => {
             <div className="container">
                 <h2 onClick={() => navigate('/')} className="banner hover-link ">Social Media</h2>
                 <div className="right-side">
-                    <div className=" hover-link " onClick={() => navigate(`/profile/${myProfile?._id}`)} >
+                    <div className="user-info hover-link " onClick={() => navigate(`/profile/${myProfile?._id}`)} >
                         <Avatar src={myProfile?.avatar?.url} />
+                        <p className="user-name" > {myProfile?.name} </p>
                     </div>
                     <div className="logout hover-link" onClick={handleLogOut} >
                         <RiLogoutBoxLine />

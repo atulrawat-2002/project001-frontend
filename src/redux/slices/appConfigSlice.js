@@ -37,7 +37,12 @@ const appConfigSlice = createSlice({
     initialState: {
         isLoading: false,
         myProfile: {},
-        toastData: {}
+        toastData: {},
+        showPopUp: {
+            value: false,
+            userId: null,
+            postId: null
+        },
     },
     reducers: {
         setLoading: (state, action) => {
@@ -45,6 +50,17 @@ const appConfigSlice = createSlice({
         },
         setToast: (state, action) => {
             state.toastData = action.payload;
+        },
+        setShowPopUp : (state, action) => {
+            state.showPopUp.value = state.showPopUp.value === true ? false : true;
+            state.showPopUp.userId = action.payload?.userId || state.showPopUp.userId;
+            state.showPopUp.postId = action.payload?.postId || state.showPopUp.postId;
+        },
+        deletePost: (state, action) => {
+            state.myProfile = {
+                ...state.myProfile,
+                posts: state?.myProfile?.posts.filter(post => post != action.payload)
+            }
         }
     },
     extraReducers: (builder) => {
@@ -58,4 +74,4 @@ const appConfigSlice = createSlice({
 
 
 export default appConfigSlice.reducer;
-export const { setLoading, setToast } = appConfigSlice.actions;
+export const { setLoading, setToast, setShowPopUp, deletePost } = appConfigSlice.actions;

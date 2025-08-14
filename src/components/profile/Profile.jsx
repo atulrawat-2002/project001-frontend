@@ -1,12 +1,13 @@
 import Post from "../post/Posts";
 import "./Profile.scss"
-import userImg from "../../assets/user.jpg"
 import { useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../createPost/CreatePost";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {  getUserProfile } from "../../redux/slices/postSlice";
+import {  getUserProfile, showFollwersList } from "../../redux/slices/postSlice";
 import { followAndUnFollow } from "../../redux/slices/feedSlice";
+import PopUp from "../popUp/PopUp";
+import FollowersList from "../followersList/FollowersLists";
 
 const Profile = () => {
 const navigate = useNavigate();
@@ -19,6 +20,8 @@ const [isFollowing, setIsFollowing] = useState(false);
 const userProfile = useSelector(state => state?.postsReducer?.userProfile);
 const myProfile = useSelector(state => state?.appConfigReducer?.myProfile);
 const feedData = useSelector(state => state?.feedReducer?.feedData);
+const showPopUp = useSelector(state => state?.appConfigReducer?.showPopUp);
+const showList = useSelector(state => state?.postsReducer?.followersList?.showList);
 
 useEffect(() => {
     
@@ -28,7 +31,7 @@ useEffect(() => {
     
     setIsFollowing(myProfile?.followings?.includes(params.userId));
 
-    setIsMyProfile(myProfile._id === params.userId);
+    setIsMyProfile(myProfile._id === params.userId); 
 }, [myProfile, feedData, params.userId])
 
 
@@ -41,6 +44,10 @@ const handleFollowUnFollow = () => {
     }
 
     return <>
+
+    { showList && <FollowersList /> }
+
+    { showPopUp?.value ? <PopUp /> : "" }
         <div className="profile">
             <div className="container">
                 <div className="left-part">
@@ -55,8 +62,14 @@ const handleFollowUnFollow = () => {
                         <h3 className="user-name" > {userProfile?.user?.name} </h3>
                         <p className="bio" > {userProfile?.user?.bio} </p>
                         <div className="follower-info">
-                            <h4> {userProfile?.user?.followers.length} Followers</h4>
-                            <h4> {userProfile?.user?.followings.length} Followings </h4>
+                            <h4 onClick={() => dispatch(showFollwersList({
+                                showList: true,
+                                listData: userProfile?.user?.followings
+                            }))} className="followers-list-link hover-link" > {userProfile?.user?.followings.length} Followings </h4>
+                            <h4 onClick={() => dispatch(showFollwersList({
+                                showList: true,
+                                listData: userProfile?.user?.followers
+                            }))} className=" followers-list-link hover-link" > {userProfile?.user?.followers.length} Followers</h4>
                         </div>
                         
                         { isMyProfile ? <button className="update-profile btn-secondary" onClick={() => navigate('/updateProfile')} >Update Profile</button> : ( isFollowing ?  <button onClick={handleFollowUnFollow} className="follow btn-secondary" >UnFollow</button> : <button onClick={handleFollowUnFollow} className="follow btn-primary" >Follow</button> ) }

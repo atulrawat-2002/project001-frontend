@@ -1,19 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Follower from "../follower/Follower";
 import Post from "../post/Posts";
 import "./Feed.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { getFeeData } from "../../redux/slices/feedSlice";
+import PopUp from "../popUp/PopUp";
 
 const Feed = () => {
     const dispatch = useDispatch();
     const feedData = useSelector(state => state?.feedReducer?.feedData);
+    const showPopUp = useSelector(state => state?.appConfigReducer?.showPopUp);
+    
 
     useEffect(() => {
         dispatch(getFeeData())
     }, [])
 
     return <>
+
+    { showPopUp?.value ? <PopUp /> : "" }
         <div className="feed">
             <div className="container">
                 <div className="left-part">

@@ -24,8 +24,8 @@ export const followAndUnFollow = createAsyncThunk("user/followAndUnFollow", asyn
     } catch (error) {
         return Promise.reject(error)
     } finally {
-        thunkAPI.dispatch(getFeeData());
-        thunkAPI.dispatch(getMyInfo())
+        // thunkAPI.dispatch(getFeeData());
+        // thunkAPI.dispatch(getMyInfo())
         thunkAPI.dispatch(setLoading(false))
     }
 })

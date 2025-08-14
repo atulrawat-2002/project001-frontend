@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { setLoading } from "./appConfigSlice";
+import { deletePost, setLoading } from "./appConfigSlice";
 import { axiosClient } from "../../utils/axiosClient";
 
 
@@ -35,7 +35,23 @@ export const likeAndUnlike = createAsyncThunk("posts/like", async (body, thunkAP
 const postSlice = createSlice({
     name: 'posts',
     initialState: {
-        userProfile: {}
+        userProfile: {},
+        followersList: {
+            showList: true,
+            listData: null
+        }
+    },
+    reducers: {
+        deleteFeedPost: (state, action) => {
+            state.userProfile = {
+                ...state?.userProfile,
+                posts: state?.userProfile?.posts.filter(post => post._id != action.payload)
+            }
+        },
+        showFollwersList: (state, action) => {
+            state.followersList.showList = action?.payload?.showList;
+            state.followersList.listData = action?.payload?.listData;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getUserProfile.fulfilled, (state, action) => {
@@ -57,3 +73,4 @@ const postSlice = createSlice({
 
 
 export default postSlice.reducer;
+export const { deleteFeedPost, showFollwersList } = postSlice.actions;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { likeAndUnlike } from "../../redux/slices/postSlice";
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { setToast } from "../../redux/slices/appConfigSlice";
+import { setShowPopUp, setToast } from "../../redux/slices/appConfigSlice";
 import { TOAST_SUCCESS } from "../../App";
 
 
@@ -26,9 +26,23 @@ function Post ( {post} ) {
 
     return <>
         <div className="post">
-            <div className="heading" onClick={() => navigate(`/profile/${post?.owner?._id}`)} >
-                <Avatar src={post?.owner?.avatar?.url} />
-                <h4> {post?.owner?.name} </h4>
+            <div className="heading" >
+                <div className="name-avatar" onClick={() => navigate(`/profile/${post?.owner?._id}`)} >
+                    <Avatar src={post?.owner?.avatar?.url} />
+                <h4 className="user-name" > {post?.owner?.name} </h4>
+                </div>
+                <div className="action"  >
+                    <ul onClick={() => {
+                    dispatch(setShowPopUp({
+                        userId: post?.owner?._id,
+                        postId: post?._id
+                    }))
+                }} >
+                        <li className="action-icon" ></li>
+                        <li className="action-icon" ></li>
+                        <li className="action-icon" ></li>
+                    </ul>
+                </div>
             </div>
             <div className="content">
                 <img src={post?.image?.url} alt="" />
@@ -40,7 +54,6 @@ function Post ( {post} ) {
                  }
                  <h4> {post?.likesCount} Likes</h4>
                  
-               <div className="del-btn" >Delete</div>
                </div>
                <p className="caption" > {post?.caption} </p>
                <h6 className="time-ago" > {post?.timeAgo} </h6>

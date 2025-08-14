@@ -6,11 +6,28 @@
 
     .heading {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         gap: 20px;
         height: 60px;
         padding: 20px;
-        cursor: pointer;
+
+        .name-avatar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .action ul{
+            cursor: pointer;
+            // display: none;
+                    
+            .action-icon {
+                margin: -9px 0;
+            }
+
+        }
     }
 
     .content {
