@@ -37,8 +37,9 @@ const postSlice = createSlice({
     initialState: {
         userProfile: {},
         followersList: {
-            showList: true,
-            listData: null
+            showList: false,
+            listData: null,
+            relation: ""
         }
     },
     reducers: {
@@ -51,6 +52,8 @@ const postSlice = createSlice({
         showFollwersList: (state, action) => {
             state.followersList.showList = action?.payload?.showList;
             state.followersList.listData = action?.payload?.listData;
+            state.followersList.relation = action?.payload?.relation;
+            
         }
     },
     extraReducers: (builder) => {

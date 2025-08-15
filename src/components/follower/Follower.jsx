@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../avatar/Avatar";
 import "./Follower.scss"
 import { useEffect, useState } from "react";
-import { followAndUnFollow } from "../../redux/slices/feedSlice";
+import { followAndUnFollow, followUser } from "../../redux/slices/feedSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -15,12 +15,14 @@ function Follower ({data}) {
     useEffect(() => {
         setIsFollowing(feedData?.curUser?.followings.includes(data))
         
-    }, [feedData])
+    }, [feedData?.curUser])
     
     const handleFollowUnFollow = () => {
         dispatch(followAndUnFollow({
             toUserId: data._id
         }))
+
+        
     }
 
     return <>

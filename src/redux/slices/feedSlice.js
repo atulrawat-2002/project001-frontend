@@ -19,12 +19,14 @@ export const getFeeData = createAsyncThunk("user/getFeedData", async (body, thun
 export const followAndUnFollow = createAsyncThunk("user/followAndUnFollow", async (body, thunkAPI) => {
     try {
         thunkAPI.dispatch(setLoading(true))
-        const response = await axiosClient.post("/user/follow", body);
+        await axiosClient.post("/user/follow", body);
+
+        return body;
 
     } catch (error) {
         return Promise.reject(error)
     } finally {
-        // thunkAPI.dispatch(getFeeData());
+        // thunkAPI.dispatch(getFeeData());        
         // thunkAPI.dispatch(getMyInfo())
         thunkAPI.dispatch(setLoading(false))
     }
@@ -47,9 +49,27 @@ const feedSlice = createSlice({
                     posts: state?.feedData?.posts.map(p => (p._id === post._id ? post : p))
                 }
             }
-        })
+        }).addCase(followAndUnFollow.fulfilled, (state, action) => {
+                                
+            const index = state.feedData.suggestions.findIndex(item => item._id === action.payload["toUserId"]);
+            if(index != -1) {
+                const user = state.feedData.suggestions.splice(index, 1);
+                state?.feedData?.curUser?.followings.push(user[0]);
+
+            } else {
+                const followIndex = state?.feedData?.curUser?.followings.findIndex(item => item._id === action.payload["toUserId"]);
+                
+                if(followIndex != -1) {
+                    
+                    const user = state.feedData.curUser.followings.splice(followIndex, 1);
+                    state.feedData.suggestions.push(user[0]);
+                }
+            }
+            
+        } )
     }
 })
 
 
 export default feedSlice.reducer;
+export const { followUser } = feedSlice.actions

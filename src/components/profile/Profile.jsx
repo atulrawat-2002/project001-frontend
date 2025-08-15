@@ -21,7 +21,7 @@ const userProfile = useSelector(state => state?.postsReducer?.userProfile);
 const myProfile = useSelector(state => state?.appConfigReducer?.myProfile);
 const feedData = useSelector(state => state?.feedReducer?.feedData);
 const showPopUp = useSelector(state => state?.appConfigReducer?.showPopUp);
-const showList = useSelector(state => state?.postsReducer?.followersList?.showList);
+const { showList, listData} = useSelector(state => state?.postsReducer?.followersList);
 
 useEffect(() => {
     
@@ -42,10 +42,11 @@ const handleFollowUnFollow = () => {
         
         navigate(`/profile/${params.userId}`)
     }
+    
 
     return <>
 
-    { showList && <FollowersList /> }
+    { ( showList && listData?.length !== 0 ) && <FollowersList /> }
 
     { showPopUp?.value ? <PopUp /> : "" }
         <div className="profile">
@@ -64,11 +65,13 @@ const handleFollowUnFollow = () => {
                         <div className="follower-info">
                             <h4 onClick={() => dispatch(showFollwersList({
                                 showList: true,
-                                listData: userProfile?.user?.followings
+                                listData: userProfile?.user?.followings,
+                                relation: "Following"
                             }))} className="followers-list-link hover-link" > {userProfile?.user?.followings.length} Followings </h4>
                             <h4 onClick={() => dispatch(showFollwersList({
                                 showList: true,
-                                listData: userProfile?.user?.followers
+                                listData: userProfile?.user?.followers,
+                                relation: "Followers"
                             }))} className=" followers-list-link hover-link" > {userProfile?.user?.followers.length} Followers</h4>
                         </div>
                         
