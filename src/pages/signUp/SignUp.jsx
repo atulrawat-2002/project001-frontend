@@ -2,6 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "./signUp.scss"
 import { useState } from "react";
 import { axiosClient } from "../../utils/axiosClient";
+import { TOAST_FAILUR, TOAST_SUCCESS } from "../../App";
+import { setToast } from "../../redux/slices/appConfigSlice";
+import { useDispatch } from "react-redux";
 
 
 
@@ -12,16 +15,23 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     async function handleSubmit(e) {
         e.preventDefault()
         try{
             const result = await axiosClient.post("/auth/signup", {
+            name: firstName +" "+ lastName,    
             email,
             password
         });
-        
-        navigate("/login")
+
+        if(result) navigate("/login")
+        else dispatch(setToast({
+            type: TOAST_FAILUR,
+            message: "Error While signup"
+        }))
+       
         } catch(error) {
             console.log(error);
             
@@ -34,13 +44,13 @@ const SignUp = () => {
                 <h2 className="heading">Sign Up</h2>
                 <form onSubmit={handleSubmit} >
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" className="first-name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <input type="text" id="first-name" placeholder="Ex: John" className="first-name" value={firstName} onChange={e => setFirstName(e.target.value)} />
 
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" className="last-name" value={lastName} onChange={e => setLastNaame(e.target.value)} />
+                    <input type="text" id="last-name" className="last-name" placeholder="Ex: karter" value={lastName} onChange={e => setLastNaame(e.target.value)} />
 
                     <label htmlFor="email">Email</label>
-                    <input type="email" className="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" className="email" placeholder="example@gmail.com" id="email" value={email} onChange={e => setEmail(e.target.value)} />
 
                     <label htmlFor="password">Password</label>
                     <input type="text" id="password" className="password" value={password} onChange={e => setPassword(e.target.value)} />

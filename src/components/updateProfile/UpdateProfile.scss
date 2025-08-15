@@ -59,9 +59,24 @@
             width: fit-content;
         }
 
+        .submit-btn {
+            background-color: #3485fd;
+        }
+
+        .submit-btn:hover {
+            background-color: #0262f1;
+        }
+
         .delete-account {
             margin-top: 16px;
-            background-color: rgb(252, 54, 54);
+            color: whitesmoke;
+            background-color: rgb(252, 36, 36);
         }
+
+        .delete-account:hover {
+            color: white;
+            background-color:  rgb(238, 5, 5);
+        }
+
     }
 }

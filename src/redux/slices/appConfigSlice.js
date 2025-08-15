@@ -71,7 +71,6 @@ const appConfigSlice = createSlice({
             state.myProfile = action.payload?.user;
         }).addCase(followAndUnFollow.fulfilled, (state, action) => {
             const index = state?.myProfile?.followings?.indexOf(action.payload["toUserId"]);
-            console.log(index);
             
             if(index != -1) {
                 const user = state?.myProfile?.followings?.splice(index, 1);

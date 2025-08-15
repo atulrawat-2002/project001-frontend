@@ -3,7 +3,9 @@ import defaultIMg from "../../assets/user.jpg"
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateMyProfile } from "../../redux/slices/appConfigSlice";
+import { setLoading, updateMyProfile } from "../../redux/slices/appConfigSlice";
+import { axiosClient } from "../../utils/axiosClient";
+import { KEY_ACCESS_TOKEN, removeItem } from "../../utils/localStorageManager";
 
 
 function UpdateProfile () {
@@ -31,6 +33,19 @@ const handleUserImg = async (e) => {
     }
 }
 
+const handleDelete = async () => {
+   try {
+    dispatch(setLoading(true))
+     await axiosClient.delete("/user/deleteMyProfile");
+     removeItem(KEY_ACCESS_TOKEN);
+     window.location.replace('/login')
+   } catch (error) {
+    console.log(error);
+   } finally {
+    dispatch(setLoading(false))
+   }
+}
+
 async function handleSubmit (e) {
     e.preventDefault()
     dispatch(updateMyProfile({
@@ -55,9 +70,9 @@ async function handleSubmit (e) {
                     <form onSubmit={handleSubmit} >
                         <input type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} />
                         <input type="text" placeholder="Your bio" value={bio} onChange={e => setBio(e.target.value)} />
-                        <input type="submit" className="btn-primary" placeholder="Update" />
+                        <input type="submit" className="btn-primary submit-btn " placeholder="Update" />
                     </form>
-                    <button className="delete-account btn-primary" >Delete Account</button>
+                    <button className="delete-account btn-primary" onClick={handleDelete} >Delete Account</button>
                 </div>
             </div>
         </div>

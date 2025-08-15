@@ -4,37 +4,28 @@ import { showFollwersList } from "../../redux/slices/postSlice";
 import Avatar from "../avatar/Avatar";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { followAndUnFollow } from "../../redux/slices/feedSlice";
 
 
 const FollowersList = () => {
 
     const { listData, relation} = useSelector(state => state?.postsReducer?.followersList);
-    const myFollowings = useSelector(state => state?.postsReducer?.userProfile?.user?.followings);
-    console.log(myFollowings, listData)
-    
+    const myFollowings = useSelector(state => state?.appConfigReducer?.myProfile?.followings);
+    const curUser = useSelector(state => state?.appConfigReducer?.myProfile);
     const navigate = useNavigate();
 
     
     const dispatch = useDispatch();
 
-    function handleFollow () {
-
+    function handleFollow (toUserId) {
+        dispatch(followAndUnFollow({
+            toUserId: toUserId
+        }))
         dispatch(showFollwersList({
             showList: false 
         }))
     }
 
-    function isFollow (newUser) {
-        let flag = true;
-        myFollowings.map((user) => {
-            if(user._id === newUser._id) {
-                console.log(true)
-                flag = false;
-            }
-        })
-        return flag;
-    }
-    
 
     return <>
         <div className="followers-list-container " > 
@@ -50,6 +41,7 @@ const FollowersList = () => {
             </div>
             {
                 listData?.map( (item) => {
+                    if(curUser._id !== item._id) {
                     return <div key={item?._id} className="list-items">
                         <div className="list-left-part hover-link " onClick={() => {
                             navigate(`/profile/${item?._id}`)
@@ -63,12 +55,13 @@ const FollowersList = () => {
                         <div className="list-right-part">
                             
                         {
-                               isFollow(item) ? <button  className="follow-action-btn  " onClick={handleFollow} > Follow </button> : <button  className="unfollow-action-btn  " onClick={handleFollow} > Unfollow </button>
+                            myFollowings?.includes(item?._id) ? <button  className="unfollow-action-btn  " onClick={() => handleFollow(item?._id)} > Unfollow </button> : <button  className="follow-action-btn  " onClick={() => handleFollow(item?._id)} > Follow </button> 
                           
                         }
 
                         </div>
                     </div>
+                }
                 } )
             }
             

@@ -7,8 +7,8 @@ import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager";
 
 const login = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("nitin@gmail.com");
-    const [password, setPassword] = useState("1234")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -38,7 +38,7 @@ const login = () => {
                 <h2 className="heading">Login</h2>
                 <form onSubmit={(e) => handleSubmit(e)} >
                     <label htmlFor="email">Email</label>
-                    <input type="email" className="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" className="email" placeholder="example@gmail.com" id="email" value={email} onChange={e => setEmail(e.target.value)} />
 
                     <label htmlFor="password">Password</label>
                     <input type="text" id="password" className="password" value={password} onChange={e => setPassword(e.target.value)} />

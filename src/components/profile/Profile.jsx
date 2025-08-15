@@ -8,6 +8,7 @@ import {  getUserProfile, showFollwersList } from "../../redux/slices/postSlice"
 import { followAndUnFollow } from "../../redux/slices/feedSlice";
 import PopUp from "../popUp/PopUp";
 import FollowersList from "../followersList/FollowersLists";
+import userImg from "../../assets/user.png"
 
 const Profile = () => {
 const navigate = useNavigate();
@@ -59,7 +60,7 @@ const handleFollowUnFollow = () => {
                 </div>
                 <div className="right-part">
                     <div className="profile-card">
-                        <img height="200px" width={"200px"} src={userProfile?.user?.avatar?.url} alt="user Image" className="user-img" />
+                        <img height="200px" width={"200px"} src={ userProfile?.user?.avatar?.url ? userProfile?.user?.avatar?.url : userImg } alt="user Image" className="user-img" />
                         <h3 className="user-name" > {userProfile?.user?.name} </h3>
                         <p className="bio" > {userProfile?.user?.bio} </p>
                         <div className="follower-info">

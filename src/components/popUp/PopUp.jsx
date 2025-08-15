@@ -43,7 +43,7 @@ const handleFollow = () => {
         toUserId: showPopUp?.userId
     }))
 
-    navigate(`/profile/${showPopUp?.userId}`)
+    // navigate(`/profile/${showPopUp?.userId}`)
 }
 
 
@@ -53,8 +53,13 @@ const handleFollow = () => {
                 { isMyProfile && <li className="list-item list-item-delete " onClick={() => handleDeletePost()} >Delete Post</li> }
                 { isMyProfile && <li className="list-item">Edit Post</li> }
                 { isMyProfile || <li className="list-item" onClick={() => navigate(`/profile/${showPopUp?.userId}`)} >View Profile</li> }
-                { isMyProfile || <li className="list-item list-item-delete " onClick={handleFollow} >Unfollow User</li> }
-                <li className="list-item follow-action " >Follow User</li>
+                {/* { isMyProfile || <li className="list-item list-item-delete " onClick={handleFollow} >Unfollow User</li> } */}
+                   {
+                    ( !(isMyProfile) && !(curUser?.followings?.includes(showPopUp?.userId)) )  && <li className="list-item follow-action " onClick={handleFollow} >Follow User</li>
+                   } 
+                   {
+                    ( !(isMyProfile) && (curUser?.followings?.includes(showPopUp?.userId)) ) && <li className="list-item unfollow-action " onClick={handleFollow} >Unollow User</li>
+                   }
                 <li className="list-item">Cancel</li>
             </ul>
         </div>
