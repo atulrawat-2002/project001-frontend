@@ -32,7 +32,7 @@ useEffect(() => {
     setIsFollowing(myProfile?.followings?.includes(params.userId));
 
     setIsMyProfile(myProfile._id === params.userId); 
-}, [myProfile, feedData, params.userId])
+}, [myProfile, feedData?.suggestions?.length, feedData?.curUser?.followings?.length, params?.userId]) 
 
 
 const handleFollowUnFollow = () => {

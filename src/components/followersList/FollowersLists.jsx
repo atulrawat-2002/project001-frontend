@@ -9,16 +9,30 @@ import { useNavigate } from "react-router-dom";
 const FollowersList = () => {
 
     const { listData, relation} = useSelector(state => state?.postsReducer?.followersList);
-    const myFollowings = useSelector(state => state?.appConfigReducer?.myProfile?.followings);
+    const myFollowings = useSelector(state => state?.postsReducer?.userProfile?.user?.followings);
+    console.log(myFollowings, listData)
+    
     const navigate = useNavigate();
 
     
     const dispatch = useDispatch();
 
     function handleFollow () {
+
         dispatch(showFollwersList({
             showList: false 
         }))
+    }
+
+    function isFollow (newUser) {
+        let flag = true;
+        myFollowings.map((user) => {
+            if(user._id === newUser._id) {
+                console.log(true)
+                flag = false;
+            }
+        })
+        return flag;
     }
     
 
@@ -43,18 +57,14 @@ const FollowersList = () => {
                                 showList: false
                             }))
                         }} >
-                            <Avatar src={item?.avata?.url} />
+                            <Avatar src={item?.avatar?.url} />
                             <h4 className="list-item-name" > {item?.name} </h4>
                         </div>
                         <div className="list-right-part">
                             
                         {
-                            myFollowings?.includes(item._id) ? <button  className="unfollow-action-btn  " onClick={handleFollow} > Unfollow </button> : <button  className="view-action-btn " onClick={() => {
-                                navigate(`/profile/${item?._id}`)
-                                dispatch(showFollwersList({
-                                    showList: false
-                                }))
-                            } } > View Profile </button>
+                               isFollow(item) ? <button  className="follow-action-btn  " onClick={handleFollow} > Follow </button> : <button  className="unfollow-action-btn  " onClick={handleFollow} > Unfollow </button>
+                          
                         }
 
                         </div>

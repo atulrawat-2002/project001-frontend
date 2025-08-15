@@ -26,8 +26,6 @@ export const followAndUnFollow = createAsyncThunk("user/followAndUnFollow", asyn
     } catch (error) {
         return Promise.reject(error)
     } finally {
-        // thunkAPI.dispatch(getFeeData());        
-        // thunkAPI.dispatch(getMyInfo())
         thunkAPI.dispatch(setLoading(false))
     }
 })
@@ -51,18 +49,18 @@ const feedSlice = createSlice({
             }
         }).addCase(followAndUnFollow.fulfilled, (state, action) => {
                                 
-            const index = state.feedData.suggestions.findIndex(item => item._id === action.payload["toUserId"]);
+            const index = state?.feedData?.suggestions?.findIndex(item => item._id === action.payload["toUserId"]);
             if(index != -1) {
-                const user = state.feedData.suggestions.splice(index, 1);
-                state?.feedData?.curUser?.followings.push(user[0]);
+                const user = state?.feedData?.suggestions?.splice(index, 1);
+                state?.feedData?.curUser?.followings?.push(user[0]);
 
             } else {
-                const followIndex = state?.feedData?.curUser?.followings.findIndex(item => item._id === action.payload["toUserId"]);
+                const followIndex = state?.feedData?.curUser?.followings?.findIndex(item => item._id === action.payload["toUserId"]);
                 
                 if(followIndex != -1) {
                     
-                    const user = state.feedData.curUser.followings.splice(followIndex, 1);
-                    state.feedData.suggestions.push(user[0]);
+                    const user = state?.feedData?.curUser?.followings?.splice(followIndex, 1);
+                    state?.feedData?.suggestions?.push(user[0]);
                 }
             }
             

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosClient } from "../../utils/axiosClient";
+import { followAndUnFollow } from "./feedSlice";
 
 
 export const getMyInfo = createAsyncThunk("user/getMyInfo", async(body, thunkAPI) =>{
@@ -68,6 +69,15 @@ const appConfigSlice = createSlice({
             state.myProfile = action.payload?.user;
         }).addCase(updateMyProfile.fulfilled, (state, action) => {
             state.myProfile = action.payload?.user;
+        }).addCase(followAndUnFollow.fulfilled, (state, action) => {
+            const index = state?.myProfile?.followings?.indexOf(action.payload["toUserId"]);
+            console.log(index);
+            
+            if(index != -1) {
+                const user = state?.myProfile?.followings?.splice(index, 1);
+            } else {
+                state?.myProfile?.followings?.push(action.payload["toUserId"]);    
+            }
         })
     }
 })
