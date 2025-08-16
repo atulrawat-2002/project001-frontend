@@ -13,9 +13,9 @@
   --accent-color: #458eff;
 }
 
-body {
+/* body {
   background-color: rgb(88, 88, 88);
-}
+} */
 
 h1,
 h2,
@@ -84,4 +84,33 @@ p {
 
 .btn-secondary:active {
   background-color: none;
+}
+
+@media (max-width: 480px) {
+  h3,
+h6 {
+  font-weight: 100;
+}
+
+p {
+  color: #555;
+  font-size: 0.5rem;
+}
+
+.container {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.btn-primary {
+  font-weight: bold;
+  padding: 3px 9px;
+  border: none;
+}
+
+.btn-secondary {
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
 }

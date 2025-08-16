@@ -32,7 +32,7 @@ const handleLogOut = async () => {
         <div className="navbar" >
             
             <div className="container">
-                <h2 onClick={() => navigate('/')} className="banner hover-link ">Social Media</h2>
+                <h2 onClick={() => navigate('/')} className="banner hover-link "> <code> &lt;&gt;Connections&lt;/&gt; </code> </h2>
                 <div className="right-side">
                     <div className="user-info hover-link " onClick={() => navigate(`/profile/${myProfile?._id}`)} >
                         <Avatar src={myProfile?.avatar?.url} />

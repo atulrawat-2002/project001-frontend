@@ -35,7 +35,7 @@ const login = () => {
     return <>
         <div className="login" >
             <div className="login-box" >
-                <h2 className="heading">Login</h2>
+                <h2 className="heading"><code> &lt;&gt;Connections&lt;/&gt; </code></h2>
                 <form onSubmit={(e) => handleSubmit(e)} >
                     <label htmlFor="email">Email</label>
                     <input type="email" className="email" placeholder="example@gmail.com" id="email" value={email} onChange={e => setEmail(e.target.value)} />

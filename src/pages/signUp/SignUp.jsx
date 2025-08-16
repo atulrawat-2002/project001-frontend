@@ -41,7 +41,7 @@ const SignUp = () => {
     return <>
          <div className="sign" >
             <div className="sign-box" >
-                <h2 className="heading">Sign Up</h2>
+                <h2 className="heading"><code> &lt;&gt;Connections&lt;/&gt; </code></h2>
                 <form onSubmit={handleSubmit} >
                     <label htmlFor="first-name">First Name</label>
                     <input type="text" id="first-name" placeholder="Ex: John" className="first-name" value={firstName} onChange={e => setFirstName(e.target.value)} />
