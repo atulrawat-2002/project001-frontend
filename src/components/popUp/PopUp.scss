@@ -43,3 +43,19 @@
         background-color: rgb(99, 98, 98);
     }
 }
+
+
+@media (max-width: 480px) {
+    .action-list-container {
+        left: 20%;
+        position: sticky;
+        width: 65vw;
+
+
+        
+    .list-item {
+        padding: 7px 10px;
+        font-size: .7rem;
+    }
+    }
+}
