@@ -26,7 +26,7 @@ const Feed = () => {
                 </div>
                 <div className="right-part">
                     <div className="followings">
-                        <h3 className="title">You are following</h3>
+                        <h3 className="title followings-title">You are following</h3>
 
                         {
                             feedData?.curUser?.followings.map(item => <Follower key={item._id} data={item} />)
