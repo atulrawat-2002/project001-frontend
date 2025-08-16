@@ -38,7 +38,8 @@ const handleLogOut = async () => {
                         <Avatar src={myProfile?.avatar?.url} />
                         <p className="user-name" > {myProfile?.name} </p>
                     </div>
-                    <div className="logout hover-link" onClick={handleLogOut} >
+                    
+                    <div title="Logout" className="logout hover-link" onClick={handleLogOut} >
                         <RiLogoutBoxLine />
                     </div>
                 </div>

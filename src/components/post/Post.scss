@@ -19,10 +19,10 @@
             cursor: pointer;
         }
 
-        .action ul{
+        .action ul {
             cursor: pointer;
             // display: none;
-                    
+
             .action-icon {
                 margin: -9px 0;
             }
@@ -39,6 +39,7 @@
             object-fit: cover;
         }
     }
+
     .footer {
         padding: 20px;
         // display: flex;
@@ -57,9 +58,45 @@
         .caption {
             margin-top: 12px;
         }
+
         .time-ago {
             margin-top: 12px;
             color: #aaa;
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .post {
+
+        .heading {
+            gap: 0px;
+            padding: 4px;
+        }
+
+        .content {
+            height: 250px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .footer {
+            padding: 10px;
+
+            .likes {
+            .icon {
+                font-size: 1.3rem;
+            }
+        }
+
+        .caption {
+            font-size: .7rem;
+        }
         }
     }
 }

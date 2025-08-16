@@ -43,3 +43,36 @@
     }
 
 }
+
+@media (max-width: 480px) {
+    .navbar {
+        height: auto;
+
+        .container {
+            flex-direction: column;
+
+            .right-side {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 5px;
+            }
+
+            .user-info {
+                // flex-direction: column;
+                // display: none;
+            }
+
+            .logout {
+                // display: none;
+            }
+
+            .banner {
+                margin: 0 auto;
+                padding: 5px 1px;
+            }
+
+        }
+
+    }
+}

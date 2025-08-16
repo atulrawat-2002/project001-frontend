@@ -34,10 +34,6 @@ const CreatePost = () => {
             caption,
             postImg
         })
-        // dispath(getMyInfo())
-        // dispath(getUserProfile({
-        //     userId: myProfile?.userId
-        // }));
         return response;
 
         } catch (e) {

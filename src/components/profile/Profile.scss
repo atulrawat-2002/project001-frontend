@@ -5,10 +5,12 @@
         display: flex;
         gap: 20px;
     }
+
     .left-part {
         flex: 2;
         overflow-y: auto;
     }
+
     .right-part {
         flex: 1;
         margin-top: 20px;
@@ -30,7 +32,8 @@
             border-radius: 50%;
         }
 
-        .user-name, .follower-info {
+        .user-name,
+        .follower-info {
             margin-top: 12px;
         }
 
@@ -45,9 +48,53 @@
             gap: 60px;
         }
 
-        .follow, .update-profile {
+        .follow,
+        .update-profile {
             margin-top: 20px;
             display: inline-block;
         }
+    }
+}
+
+@media (max-width: 480px) {
+    .profile {
+
+        .container {
+            flex-direction: column-reverse;
+
+
+            .left-part {
+                flex: 1;
+                overflow-y: auto;
+            }
+
+            .right-part {
+                flex: 2;
+                margin-top: 20px;
+
+                .follower-info {
+                    font-size: .9rem;
+                }
+
+                .update-profile {
+                    font-size: .7rem;
+                    padding: 7px 8px;
+                }
+
+                .profile-card {
+                    width: 100%;
+                    padding: 30px 40px;
+
+                    .bio {
+                        font-size: .7rem;
+                    }
+                }
+
+                .follower-info {
+                    gap: 40px;
+                }
+            }
+        }
+
     }
 }
