@@ -43,7 +43,7 @@ const FollowersList = () => {
 
                 {
                     listData?.map((item) => {
-                        if (curUser._id !== item._id) {
+                        
                             return <div key={item?._id} className="list-items">
                                 <div className="list-left-part hover-link " onClick={() => {
                                     navigate(`/profile/${item?._id}`)
@@ -56,14 +56,11 @@ const FollowersList = () => {
                                 </div>
                                 <div className="list-right-part">
 
-                                    {
-                                        myFollowings?.includes(item?._id) ? <button className="unfollow-action-btn  " onClick={() => handleFollow(item?._id)} > Unfollow </button> : <button className="follow-action-btn  " onClick={() => handleFollow(item?._id)} > Follow </button>
-
-                                    }
+{  (curUser._id !== item._id) && ( myFollowings?.includes(item?._id) ? <button className="unfollow-action-btn  " onClick={() => handleFollow(item?._id)} > Unfollow </button> : <button className="follow-action-btn  " onClick={() => handleFollow(item?._id)} > Follow </button> ) }
 
                                 </div>
                             </div>
-                        }
+                        
                     })
                 }
 
