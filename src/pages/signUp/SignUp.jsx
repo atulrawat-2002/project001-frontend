@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./signUp.scss"
+import "./SignUp.scss"
 import { useState } from "react";
 import { axiosClient } from "../../utils/axiosClient";
 import { TOAST_FAILUR, TOAST_SUCCESS } from "../../App";
