@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deletePost, setLoading } from "./appConfigSlice";
+import { setLoading } from "./appConfigSlice";
 import { axiosClient } from "../../utils/axiosClient";
 
 

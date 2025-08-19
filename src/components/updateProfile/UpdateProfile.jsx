@@ -1,5 +1,4 @@
 import "./UpdateProfile.scss"
-import defaultIMg from "../../assets/user.jpg"
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";

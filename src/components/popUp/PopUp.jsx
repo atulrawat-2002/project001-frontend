@@ -43,7 +43,6 @@ const handleFollow = () => {
         toUserId: showPopUp?.userId
     }))
 
-    // navigate(`/profile/${showPopUp?.userId}`)
 }
 
 

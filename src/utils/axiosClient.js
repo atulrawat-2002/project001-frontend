@@ -22,7 +22,6 @@ axiosClient.interceptors.request.use((request) => {
 axiosClient.interceptors.response.use(async (response) => {
     
         
-    // If the request was successfull then simply return the resonse
     try {
         const data = response?.data;
     const error = response?.data?.message;
@@ -60,7 +59,6 @@ axiosClient.interceptors.response.use(async (response) => {
         type: TOAST_FAILUR,
         message: er.message
        }))
-        // console.log(er.message)
     }
 
 
