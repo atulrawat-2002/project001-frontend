@@ -10,7 +10,7 @@ import UpdateProfile from './components/updateProfile/UpdateProfile'
 import LoadingBar from 'react-top-loading-bar'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import UserNotRequired from './components/userNotRequired'
+import UserNotRequired from './components/UserNotRequired'
 import toast, { Toaster } from 'react-hot-toast'
 
 export const TOAST_SUCCESS = 'toast_success'
