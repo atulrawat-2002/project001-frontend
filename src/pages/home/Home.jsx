@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import "./Home.scss";
 import Navbar from "../../components/navbar/Navabr";
 import { useEffect } from "react";
 import { getMyInfo } from "../../redux/slices/appConfigSlice";
