@@ -10,4 +10,4 @@ const RequireUser = () => {
 }
 
 
-export default RequireUser;
+export default RequireUser; 
